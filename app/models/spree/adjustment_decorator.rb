@@ -1,3 +1,3 @@
 Spree::Adjustment.class_eval do
-  scope :tax, -> { where(originator_type: ['Spree::TaxRate', 'Spree::TaxCloudTransaction']) }
+  scope :tax_cloud, -> { where(originator_type: 'Spree::TaxCloudTransaction') }
 end
