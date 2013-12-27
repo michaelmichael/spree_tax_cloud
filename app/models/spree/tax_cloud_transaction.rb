@@ -15,6 +15,7 @@ module Spree
     # called when order updates adjustments
 
     def update_adjustment(adjustment, source)
+      return if adjustment.blank?
       rate = amount / order.item_total
       tax  = ((order.item_total - order.promotions_total) * rate) || 0
       if (adjustment.amount * 100).round != (tax * 100).round
