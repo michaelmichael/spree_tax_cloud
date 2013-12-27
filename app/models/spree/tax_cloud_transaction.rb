@@ -25,7 +25,6 @@ module Spree
     def lookup
       create_cart_items
       response = tax_cloud.lookup(self)
-      binding.pry
       if response.success?
         transaction do
           result = response.body[:lookup_response][:lookup_result]
