@@ -1,7 +1,6 @@
 require 'builder'
 
 class Spree::TaxCloudCartItem < ActiveRecord::Base
-
   belongs_to :line_item
 
   belongs_to :tax_cloud_transaction
@@ -12,11 +11,11 @@ class Spree::TaxCloudCartItem < ActiveRecord::Base
 
   def to_hash
     {
-      'Index' => index,
-      'TIC' => tic,
-      'ItemID' => sku,
-      'Price' => price.to_s,
-      'Qty' => quantity
+      'Index'   => index,
+      'TIC'     => tic,
+      'ItemID'  => sku,
+      'Price'   => price.to_s,
+      'Qty'     => quantity
     }
   end
 end

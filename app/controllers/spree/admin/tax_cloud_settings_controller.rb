@@ -1,6 +1,5 @@
 module Spree
   class Admin::TaxCloudSettingsController < Admin::BaseController
-
     respond_to  :html
 
     def show
@@ -24,9 +23,7 @@ module Spree
 
 
       respond_to do |format|
-        format.html {
-          redirect_to admin_tax_cloud_settings_path
-        }
+        format.html{ redirect_to admin_tax_cloud_settings_path }
       end
     end
   end
