@@ -19,6 +19,7 @@ module SpreeTaxCloud
         preference :taxcloud_shipping_tic, :string, default: '11010'
         preference :taxcloud_usps_user_id, :string
         preference :taxcloud_origin, :string, default: {}.to_json
+        preference :taxclould_eligible_state_ids, :array, default: []
       end
     end
 
