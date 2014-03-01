@@ -31,7 +31,7 @@ Spree::Order.class_eval do
   end
 
   def promotions_total
-    adjustments.promotion.sum(:amount).abs
+    adjustments.eligible.promotion.sum(:amount).abs
   end
 
   def capture_tax_cloud

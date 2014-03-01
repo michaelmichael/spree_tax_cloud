@@ -17,10 +17,9 @@ module Spree
     def update_adjustment(adjustment, source)
       return if (adjustment.blank? || order.item_total == 0)
       rate = amount / order.item_total
-      tax  = ((order.item_total - order.promotions_total) * rate) || 0
-      if (adjustment.amount * 100).round != (tax * 100).round
-        adjustment.update_attribute(:amount, tax)
-      end
+      tax  = (order.item_total - order.promotions_total) * rate
+      tax  = 0 if tax.nan?
+      adjustment.update_column(:amount, tax)
     end
 
     def lookup
