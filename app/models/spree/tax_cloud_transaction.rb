@@ -8,7 +8,7 @@ module Spree
 
     validates :order, presence: true
 
-    has_one :adjustment, as: :originator
+    has_one :adjustment, as: :source
 
     has_many :cart_items, class_name: 'TaxCloudCartItem', dependent: :destroy
 
