@@ -7,7 +7,7 @@ Spree::Order.class_eval do
   self.state_machine.after_transition :to => :complete, :do => :capture_tax_cloud, :if => :tax_cloud_eligible?
 
   def tax_cloud_eligible?
-    ship_address.try(:state_id?) && order.ship_address.state_id == 32
+    ship_address.try(:state_id?) && ship_address.state_id == 32
   end
 
   def lookup_tax_cloud
