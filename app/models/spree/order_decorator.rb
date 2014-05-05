@@ -1,13 +1,12 @@
 Spree::Order.class_eval do
-
   has_one :tax_cloud_transaction
 
-  self.state_machine.after_transition :to => :payment, :do => :lookup_tax_cloud, :if => :tax_cloud_eligible?
+  self.state_machine.after_transition to: :delivery, do: :lookup_tax_cloud, if: :tax_cloud_eligible?
 
-  self.state_machine.after_transition :to => :complete, :do => :capture_tax_cloud, :if => :tax_cloud_eligible?
+  self.state_machine.after_transition to: :confirm, do: :capture_tax_cloud, if: :tax_cloud_eligible?
 
   def tax_cloud_eligible?
-    ship_address.try(:state_id?)
+    Spree::Config.taxclould_eligible_state_ids.include?(ship_address.try(:state_id))
   end
 
   def lookup_tax_cloud
@@ -22,16 +21,17 @@ Spree::Order.class_eval do
 
   def tax_cloud_adjustment
     adjustments.create do |adjustment|
-      adjustment.sourece = tax_cloud_transaction
-      adjustment.label = 'Tax'
-      adjustment.mandatory = true
-      adjustment.eligible = true
-      adjustment.amount = tax_cloud_transaction.amount
+      adjustment.source     = self
+      adjustment.source     = tax_cloud_transaction
+      adjustment.label      = 'Tax'
+      adjustment.mandatory  = true
+      adjustment.eligible   = true
+      adjustment.amount     = tax_cloud_transaction.amount
     end
   end
 
   def promotions_total
-    adjustments.eligible.promotion.map(&:amount).sum.abs
+    adjustments.eligible.promotion.sum(:amount).abs
   end
 
   def capture_tax_cloud
