@@ -6,7 +6,7 @@ Spree::Order.class_eval do
   self.state_machine.after_transition to: :confirm, do: :capture_tax_cloud, if: :tax_cloud_eligible?
 
   def tax_cloud_eligible?
-    Spree::Config.taxclould_eligible_state_ids.include?(ship_address.try(:state_id))
+    Spree::Config.taxcloud_eligible_state_ids.include?(ship_address.try(:state_id))
   end
 
   def lookup_tax_cloud
