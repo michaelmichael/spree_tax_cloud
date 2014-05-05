@@ -22,7 +22,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'savon', '1.2.0'
   s.add_runtime_dependency 'tax_cloud', '0.2.2'
 
-  s.add_development_dependency 'capybara',           '~> 1.1'
+  s.add_development_dependency 'capybara',           '~> 2.1'
   s.add_development_dependency 'coffee-rails'
   s.add_development_dependency 'database_cleaner'
   s.add_development_dependency 'factory_girl_rails', '~> 4.2'
